@@ -1,0 +1,238 @@
+﻿
+<html>
+	<head>
+		<title>OPT Web Presentation</title>
+        <link rel="stylesheet" type="text/css" href="css/opt.css" />
+        <script type="text/javascript" language="javascript" src = "JS/Socket.js" ></script>
+        <script type="text/javascript" language="javascript" src = "JS/Render.js" ></script>
+        <script type="text/javascript" language="javascript" src = "JS/Controller.js" ></script>
+        <script type="text/javascript" language="javascript" src = "JS/Event.js" ></script>
+        <script type="text/javascript" language="javascript" src = "JS/Machine.js" ></script>
+        <script type="text/javascript" language="javascript" src = "JS/PublicVariable.js" ></script>
+        <script type="text/javascript" language="javascript" src = "JS/LeftBar.js" ></script>
+        <script type="text/javascript" language="javascript" src = "JS/PrivateConversation.js" ></script>
+        <script type="text/javascript" language="javascript" src = "JS/Thoughtworker.js" ></script>
+        <script type="text/javascript" language="javascript" src = "JS/Blackyou.js" ></script>
+        <script type="text/javascript">
+            var ws;
+            var pa, pb, pc, pd, pe, blackyouObj;
+
+            var Init = function () {
+                BottomDiv();
+                //open animation
+                blackyouObj = new Blackyou("blackyouCanvas");
+                pa = new RedMachine("Procedure A", "PA");
+                pb = new GreenMachine("Procedure B", "PB");
+                pc = new RedMachine("Procedure C", "PC");
+                pd = new GreenMachine("Procedure D", "PD");
+                pe = new YellowMachine("Procedure E", "PE");
+                GetZhangQunhui().ID = "funnytw";
+
+                /*GetAnimation().AddTask(pa);
+                GetAnimation().AddTask(pb);
+                GetAnimation().AddTask(pc);
+                GetAnimation().AddTask(pd);
+                GetAnimation().AddTask(pe);*/
+                GetAnimation().Go();
+
+                //render UI
+                RenderBanner("BannerCanvas");
+                RenderNotReadyIcon("NotReady");
+                RenderSetupIcon("Setup");
+                RenderReadyIcon("Ready");
+                RenderWorkingIcon("Working");
+
+                RenderP1("P1Ready");
+                RenderP2("P2Ready");
+                RenderPipe("Pipe");
+
+                RenderP1("P1InA");
+                RenderP2("P2InB");
+                RenderP2("P2InC");
+                RenderP2("P2InD");
+
+                RenderP1("P1InE");
+                RenderP2("P2InE");
+                RenderP("PInE");
+                RenderArrow("ArrowInE");
+                
+                document.getElementById("name").focus();
+            }
+            var BottomDiv = function () {
+                LeftBorder = document.body.clientLeft + (document.body.clientWidth - 1280) / 2;
+                var el = document.getElementById("conversationdiv");
+                el.style.top = document.body.clientHeight - 152 + document.body.scrollTop;
+                var tw = document.getElementById("thoughtworker");
+                tw.style.top = 400;//document.body.clientHeight - 200; // +document.body.scrollTop;
+
+            }
+            var Login = function () {
+                //open websocket
+                var loginbutton = document.getElementById("connectbutton");
+                if (loginbutton.style.visibility == "hidden") return;
+                loginbutton.style.visibility = "hidden";
+                ws = GetSocket();
+                
+                ws.Start();
+            }
+                window.onload = Init;
+        </script>
+        <script type="text/javascript">
+            var InvokeLogin = function (e) {
+                var keynum
+                var keychar
+
+                if (window.event) // IE
+                {
+                    keynum = e.keyCode
+                }
+                else if (e.which) // Netscape/Firefox/Opera
+                {
+                    keynum = e.which
+                }
+                if (keynum == 13) {
+                    Login();
+                }
+            }
+        </script>
+	</head>
+	<body onresize="BottomDiv();">
+    <table class='MainTable'>
+    <tr><td colspan='2' class='Banner' ><div class='BannerCanvas'><canvas width='900' height='46' id='BannerCanvas'></canvas></div></td>
+    <td>Server:<input id='server' type='text' value='localhost' class='LoginText' /><br />
+    Name:&nbsp<input id='name' required type='text' value='Will'  class='LoginText' onkeypress=' InvokeLogin(event);' />
+    <input type='button' id='connectbutton' value="Login" class='Button'onclick='Login();'/></td>
+    </tr>
+    <tr><td class='ContainerPanelBanner'>
+        <table class='ContentTable'>
+            <tr><td colspan='3' class='ContentBanner'>Game Event</td></tr>
+            <tr><td class='ContentBorder'></td><td class='InformationContent'id='leftItem'></td><td class='ContentBorder'></td></tr>
+        </table>
+        </td>
+        <td class='ContainerPanel'>
+        <table class='ContentTable'>
+            <tr><td colspan=3 class='ContentBanner'>Game</td></tr>
+            <tr><td class='ContentBorder'></td>
+            <td class='Content'id='mainItem' >
+                <table class='ContentTable'>
+                <tr>
+                <td class='ToolContainer'>
+                    <table class='MachineStatus'>
+                        <tr><td colspan=3 class='ContentBanner'>MachineStatus</td></tr>
+                        <tr><td class='ContentBorder'></td><td class='Content'id='Td1'>
+                        <table>
+                            <tr><td><canvas id='NotReady' width='24' height='24'></canvas></td><td>Not Ready</td></tr>
+                            <tr><td><canvas id='Setup'  width='24' height='24'></canvas></td><td>Setup</td></tr>
+                            <tr><td><canvas id='Ready'  width='24' height='24'></canvas></td><td>Ready</td></tr>
+                            <tr><td><canvas id='Working'  width='24' height='24'></canvas></td><td>Working</td></tr>
+                        </table>
+                        </td><td class='ContentBorder'></td></tr>
+                    </table>
+                     <table class='RunningMode'>
+                        <tr><td colspan=3 class='ContentBanner'>Users [Click to Chat]</td></tr>
+                        <tr><td class='ContentBorder'></td>
+                        <td class='Content'id='Td2'><div  id='users' class='Users'></div></td></tr>
+                    </table>
+                    <table class='GameControl'>
+                        <tr><td colspan=3 class='ContentBanner'>Game Control</td></tr>
+                        <tr><td class='ContentBorder'></td><td class='Content'id='Td4'>
+                            <br />
+                            <div id="start_button" onclick="Start()" class='FullButton'>Start</div><br />
+                            <div id="pause_button" onclick="Pause()" class='FullButton'>Pause</div><br />
+                            <div id="stop_button" onclick="Stop()" class='FullButton'>Stop</div><br />
+                            </td><td class='ContentBorder'></td></tr>
+                    </table>
+                       
+                </td>
+                <td class='DisplayContainer'>
+                <div class='DisplayDiv'>
+                    
+
+                    <canvas id='P1Ready' width='36' height='36' class='P1'></canvas>
+                    <canvas id='P2Ready' width='36' height='36' class='P2'></canvas>
+                    <canvas id='Pipe' width='400' height='160' class='Pipe'></canvas>
+                    <div class='APosition'>
+                    <table class='RedMachine'>
+                        <tr><td colspan=3 class='ContentBanner'><canvas id='PA' width='99' height='19'></canvas></td></tr>
+                        <tr><td class='ContentBorder'></td><td class='Content'id='Td6'>
+                        <canvas id='P1InA' width='36' height='36' class='InProduction'></canvas>
+                        </td><td class='ContentBorder'></td></tr>
+                    </table>
+                    </div>
+                    <div class='BPosition'>
+                    <table class='GreenMachine'>
+                        <tr><td colspan=3 class='ContentBanner'><canvas id='PB' width='99' height='19'></canvas></td></tr>
+                        <tr><td class='ContentBorder'></td><td class='Content'id='Td7'>
+                        <canvas id='P2InB' width='36' height='36' class='InProduction'></canvas>
+                        </td><td class='ContentBorder'></td></tr>
+                    </table>
+                    </div>
+                    <div class='CPosition'>
+                    <table class='RedMachine'>
+                        <tr><td colspan=3 class='ContentBanner'><canvas id='PC' width='99' height='19'></canvas></td></tr>
+                        <tr><td class='ContentBorder'></td><td class='Content'id='Td8'>
+                        <canvas id='P2InC' width='36' height='36' class='InProduction'></canvas>
+                        </td><td class='ContentBorder'></td></tr>
+                    </table>
+                    </div>
+                    <div class='DPosition'>
+                    <table class='GreenMachine'>
+                        <tr><td colspan=3 class='ContentBanner'><canvas id='PD' width='99' height='19'></canvas></td></tr>
+                        <tr><td class='ContentBorder'></td><td class='Content'id='Td9'>
+                        <canvas id='P2InD' width='36' height='36' class='InProduction'></canvas>
+                        </td><td class='ContentBorder'></td></tr>
+                    </table>
+                    </div>
+                    <div class='EPosition'>
+                    <table class='YellowMachine'>
+                        <tr><td colspan=3 class='ContentBanner'><canvas id='PE' width='99' height='19'></canvas></td></tr>
+                        <tr><td class='ContentBorder'></td><td class='Content'id='Td10'>
+                        <div class='EDiv'>
+                        <canvas id='P1InE' width='36' height='36' class='P1InE'></canvas>
+                        <canvas id='P2InE' width='36' height='36' class='P2InE'></canvas>
+                        <canvas id='PInE' width='36' height='36' class='PInE'></canvas>
+                        <canvas id='ArrowInE' width='36' height='100' class='ArrowInE'></canvas>
+                        </div>
+                        </td><td class='ContentBorder'></td></tr>
+                    </table>
+                    </div>
+                    <!--<div class='APInfoPosition'><canvas id='PAInfo' width='100' height='60'></canvas></div>
+                    <div class='BPInfoPosition'><canvas id='PBInfo' width='100' height='60'></canvas></div>
+                    <div class='CPInfoPosition'><canvas id='PCInfo' width='100' height='60'></canvas></div>
+                    <div class='DPInfoPosition'><canvas id='PDInfo' width='100' height='60'></canvas></div>
+                    <div class='EPInfoPosition'><canvas id='PEInfo' width='100' height='60'></canvas></div>--> 
+                    </div>
+                    <div>
+                    <canvas id='MoneyDashboard' width='690' height = '100'></canvas>
+                    </div>
+                    <div class = 'TextDashboard'>
+                    <table width='100%' class='DashboardCell'>
+                    <tr><td>Produced P1:</td><td id="P1_N">0</td><td>Produced P2:</td><td id='P2_N'>0</td><td>Produced P:</td><td id='P_N'>0</td><td>Salary: $</td><td id='Salary'>0.00</td></tr>
+                    <tr><td>Used P1:</td><td id='P1_U'>0</td><td>Used P2:</td><td id='P2_U'>0</td><td>Used P:</td><td id='P_U'>0</td><td>Material Cost: $</td><td id='MCost'>0.00</td></tr>
+                    <tr><td>Saled P1:</td><td id='P1_S'>0</td><td>Saled P2:</td><td id='P2_S'>0</td><td>Saled P:</td><td id='P_S'>0</td><td></td><td></td></tr>
+                    <tr><td>Remained P1:</td><td id='P1_R'>0</td><td>Remained P2:</td><td id='P2_R'>0</td><td>Remained P:</td><td id='P_R'>0</td><td></td><td></td></tr>
+                    <tr><td>Revenue from P1:</td><td  id='P1_SR'>0</td><td>Revenue from P2:</td><td id='P2_SR'>0</td><td>Revenue from P:</td><td id='P_SR'>0</td><td></td><td></td></tr>
+                    </table>
+                    </div>
+                </td></tr>
+                </table>
+                
+            </td>
+            <td class='ContentBorder'></td></tr>
+        </table>
+        </td>
+        <td class='ContainerPanelBanner'>
+        <table class='ContentTable'>
+            <tr><td colspan=3 class='ContentBanner'>Game Log</td></tr>
+            <tr><td class='ContentBorder'></td><td class='Content'id='rightItem'>
+                <textarea id="incomming" class='Log' ></textarea>
+            </td><td class='ContentBorder'></td></tr>
+        </table>
+        </td>
+     </tr>
+    </table>
+        <div id='conversationdiv' class='PrivateConversation'></div>
+        <div id='thoughtworker' class='Thoughtworker'><canvas id = 'funnytw' width='200',height='100'></canvas></div>
+        <div id='blackyou' class='Blackyou'><canvas id='blackyouCanvas' width='1300', height='650'></canvas></div>
+	</body>
+</html>

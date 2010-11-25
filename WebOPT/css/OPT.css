@@ -1,0 +1,446 @@
+﻿body
+{
+    margin:0px;
+    padding:0px;
+   
+}
+input
+{
+    border-radius: 5px;
+    -webkit-box-shadow: 2px 3px 2px #E1E1E1;
+	-moz-box-shadow: 2px 3px 2px #E1E1E1;
+
+    border-top-width:1px;
+    border-top-color:Gray;
+    border-top-style:solid;
+    border-left-color:Gray;
+    border-left-style:solid;
+    border-left-width:1px;
+    border-right-color:Gray;
+    border-right-style:solid;
+    border-right-width:1px;
+    border-bottom-color:Gray;
+    border-bottom-style:solid;
+    border-bottom-width:1px;
+}
+td
+{
+    padding:0px;
+    font-family:Arial;
+    font-size:9px;
+}
+
+.MainTable
+{
+    width:1280px;
+    height:600px;
+    margin-left: auto; margin-right: auto;
+}
+.ToolContainer
+{
+    width:160px;
+    vertical-align:top;
+}
+.DisplayContainer
+{
+    vertical-align:bottom;
+    border-spacing:3px;
+    border-bottom-width:5px;
+    text-align:center;
+    position:relative;
+}
+.DisplayDiv
+{
+    position:relative;
+    height:290px;
+}
+.ContentTable
+{
+  height:100%; 
+  width:100%;
+  padding:0px;
+  border-spacing:1px;
+}
+.BannerCanvas
+{
+    width: 100%;
+    height:100%;
+    text-align:left;
+}
+.Banner
+{
+    vertical-align:bottom;
+    height:50px;
+}
+.ContentBanner
+{
+    height:20px;
+    font-weight:bold;
+    text-indent:7px;
+}
+.InformationContent
+{
+    overflow:auto;
+}
+.Content,.InformationContent
+{
+    vertical-align:top;
+    background-color:White;
+    border-top-width:1px;
+    border-top-color:Gray;
+    border-top-style:solid;
+    border-left-color:Gray;
+    border-left-style:solid;
+    border-left-width:1px;
+    border-right-color:Gray;
+    border-right-style:solid;
+    border-right-width:1px;
+    border-bottom-color:Gray;
+    border-bottom-style:solid;
+    border-bottom-width:1px;
+}
+.ContentBorder
+{
+    width:1px;
+    vertical-align:top;
+    
+}
+.ContainerPanelBanner
+{
+    width:200px;
+}
+
+.ContainerPanelBanner,.ContainerPanel,.ControlTable,.MachineStatus,.RunningMode,.SpeedControl,.GameControl
+{
+    height:100%;
+    border-radius: 5px;
+    -webkit-box-shadow: 2px 3px 2px #E1E1E1;
+	-moz-box-shadow: 2px 3px 2px #E1E1E1;
+	background-color: #E3E3E3;
+
+    border-top-width:1px;
+    border-top-color:Gray;
+    border-top-style:solid;
+    border-left-color:Gray;
+    border-left-style:solid;
+    border-left-width:1px;
+    border-right-color:Gray;
+    border-right-style:solid;
+    border-right-width:1px;
+    border-bottom-color:Gray;
+    border-bottom-style:solid;
+    border-bottom-width:1px;
+    
+    
+}
+.ControlTable
+{
+    height:200px;
+}
+.MachineStatus
+{
+    height:150px;
+}
+.SpeedControl
+{
+    height:110px;
+}
+.RunningMode
+{
+    height:220px;
+}
+.GameControl
+{
+    height:142px;
+}
+.TextDashboard,.RedMachine,.GreenMachine,.YellowMachine,.PrivateWindow
+{
+    width:100%;
+    height:144px;
+    border-spacing:1px;
+    border-radius: 5px;
+	background-color: #F3F3F3;
+
+    border-top-width:1px;
+    border-top-color:Gray;
+    border-top-style:solid;
+    border-left-color:Gray;
+    border-left-style:solid;
+    border-left-width:1px;
+    border-right-color:Gray;
+    border-right-style:solid;
+    border-right-width:1px;
+    border-bottom-color:Gray;
+    border-bottom-style:solid;
+    border-bottom-width:1px;
+}
+.TextDashboard
+{
+    height:130px;
+    background-color:White;
+}
+.ControlTable,.MachineStatus,.RunningMode,.SpeedControl,.GameControl
+{
+    width:100%;
+    padding:0px;
+    border-spacing:1px;
+    background-color: #F5F5F5;
+}
+.MoneyCanvas
+{
+    width:690px;
+    height:100px;
+}
+.IconCanvas
+{
+    width:24px;
+    height:24px;
+}
+.P1
+{
+    position:absolute; 
+    left:25px;
+    top:40px;
+  
+}
+
+.P2
+{
+    position:absolute; 
+    left:25px;
+    top:210px;
+}
+.RedMachine,.GreenMachine,.YellowMachine
+{
+    height:100px;
+    width:100px;
+    -webkit-box-shadow: 3px 4px 3px #E1E1E1;
+	-moz-box-shadow: 3px 4px 3px #E1E1E1;
+}
+.RedMachine
+{
+    background-color:pink;
+}
+.GreenMachine
+{
+    background-color:green;
+}
+.GreenMachine
+{
+    background-color:green;
+}
+.YellowMachine
+{
+    background-color:gold;
+    height:250px;
+}
+.APosition
+{
+    position:absolute;
+    left:100px;
+    top:20px;
+}
+.APInfoPosition
+{
+    position:absolute;
+    left:180px;
+    top:20px;
+}
+.BPosition
+{
+    position:absolute;
+    left:100px;
+    top:170px;
+}
+.BPInfoPosition
+{
+    position:absolute;
+    left:180px;
+    top:170px;
+}
+.CPosition
+{
+    position:absolute;
+    left:240px;
+    top:170px;
+}
+.CPInfoPosition
+{
+    position:absolute;
+    left:320px;
+    top:170px;
+}
+.DPosition
+{
+    position:absolute;
+    left:380px;
+    top:170px;
+}
+.DPInfoPosition
+{
+    position:absolute;
+    left:460px;
+    top:170px;
+}
+.EPosition
+{
+    position:absolute;
+    left:520px;
+    top:20px;
+}
+.EPInfoPosition
+{
+    position:absolute;
+    left:520px;
+    top:10px;
+}
+.Pipe
+{
+    position:absolute;
+    left:140px;
+    top:60px;
+}
+.FullButton
+{
+    cursor:pointer;
+    text-align:center;
+    font-weight:bold;
+    width:98%;
+    height:20px;
+    border-radius: 5px;
+    -webkit-box-shadow: 2px 3px 2px #E1E1E1;
+	-moz-box-shadow: 2px 3px 2px #E1E1E1;
+	background-color: #E3E3E3;
+
+    border-top-width:1px;
+    border-top-color:Gray;
+    border-top-style:solid;
+    border-left-color:Gray;
+    border-left-style:solid;
+    border-left-width:1px;
+    border-right-color:Gray;
+    border-right-style:solid;
+    border-right-width:1px;
+    border-bottom-color:Gray;
+    border-bottom-style:solid;
+    border-bottom-width:1px;
+}
+.Log
+{
+    text-align:left;
+    vertical-align:top;
+    width:100%;
+    height:100%;
+    font-family:Arial;
+    border:0px;
+    margin:0px;
+}
+.EDiv
+{
+    position:relative;
+    width:100%;
+    height:100%
+}
+.InProduction
+{
+    position:absolute; 
+    left:35px;
+    top:45px;
+    visibility:hidden;
+}
+.P1InE
+{
+    position:absolute; 
+    left:45px;
+    top:35px;
+    visibility:hidden;
+}
+.P2InE
+{
+    position:absolute; 
+    left:45px;
+    top:95px;
+    visibility:hidden;
+}
+.PInE
+{
+    position:absolute; 
+    left:45px;
+    top:155px;
+    visibility:hidden;
+}
+.ArrowInE
+{
+    position:absolute; 
+    left:10px;
+    top:60px;
+    visibility:hidden;
+}
+.DashboardCell
+{
+    text-align:right;
+    border-bottom:1px;
+    border-bottom-color:lightgray;
+}
+.NoticeWindow
+{
+    width:95%;
+    border-radius: 4px;
+    -webkit-box-shadow: 2px 3px 2px #E1E1E1;
+	-moz-box-shadow: 2px 3px 2px #E1E1E1;
+
+    border-top-width:1px;
+    border-top-color:#E7E7E7;
+    border-top-style:solid;
+    border-left-color:#E3E3E3;
+    border-left-style:solid;
+    border-left-width:1px;
+    border-right-color:#E3E3E3;
+    border-right-style:solid;
+    border-right-width:1px;
+    border-bottom-color:#E3E3E3;
+    border-bottom-style:solid;
+    border-bottom-width:1px;
+}
+.Users
+{
+    height:100%;
+    width:100%;
+    overflow:auto;
+}
+.LoginText
+{
+    width:100px;
+}
+.UserDiv
+{
+    cursor:pointer;
+    font-weight:bold;
+}
+.Button
+{
+    cursor:pointer;
+}
+.PrivateConversation
+{
+    position:fixed;
+    height:100px;
+    text-align:right;
+}
+.PrivateWindow
+{
+    position:absolute;
+    width:200px;
+    height:150px;
+    background-color:darkgreen;
+}
+.Blackyou
+{
+    position:absolute;
+    top:0px;
+}
+.Thoughtworker
+{
+    position:fixed;
+    z-index:0;
+}
